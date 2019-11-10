@@ -42,8 +42,8 @@ def main(sys_argv_1, sys_argv_2, sys_argv_3, comic_name_list, comic_link_list):
     get_comics_company_name()
     if control_cc_list(sysa=sys.argv[3]):
         print(bcolor.OKBLUE + "True" + bcolor.ENDC)
-        for div in mydivs:  # butun dir-leri alaq
-            # dir-lerin icinde header-lar var,onlari alaq
+        for div in mydivs:  # lets take all divs in site.
+            # There are "header" in div,we have to get them.
             for h2 in div.find_all('h2', class_='entry-title'):
                 if sys_argv_3 in h2.contents[0]:
                     for row in div.find_all('div', class_='row'):
@@ -51,12 +51,12 @@ def main(sys_argv_1, sys_argv_2, sys_argv_3, comic_name_list, comic_link_list):
                             # print(row_div.find('div').find('a').get('href'))
                             # print(row_div.find('div').find('a').contents[0])
 
-                            # "row_div.find('div').find('a').text" yazila biler.
+                            # You can type "row_div.find('div').find('a').text" like this.
                             comic_name = row_div.find(
                                 'div').find('a').contents[0]
                             comics_link = 'https://freshcomics.us' + \
                                 row_div.find('div').find('a').get('href')
-                            # her birini oz listesine elave edek.
+                            # append them to their own list.
                             comic_name_list.append(comic_name)
                             comic_link_list.append(comics_link)
                         break
